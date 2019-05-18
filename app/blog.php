@@ -22,4 +22,12 @@ class Blog extends Model
      * @var array
      */
     protected $hidden = [];
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+
+    public function comments(){ 
+        return $this->hasMany('App\Comment');
+    }
 }

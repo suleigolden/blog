@@ -18,13 +18,13 @@
               <div class="row">
                 @foreach($blogs as $blog)
                     <div class="col-md-4">
-                      <a href="blog-single.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
+                      <a href="######" class="blog-entry element-animate" data-animate-effect="fadeIn">
                         <img src="{{ asset('blog_images') }}/{{$blog->image}}" style="max-height: 250px; min-height: 250px;">
                         <div class="blog-content-body">
                           <div class="post-meta">
-                            <span class="author mr-2"><img src="{{ asset('blog_images') }}/person_1.jpg"> User</span>&bullet;
+                            <span class="author mr-2"><img src="{{ asset('blog_images') }}/person_1.jpg"> {{substr(strip_tags($blog->user->name),0,10)}}</span>&bullet;
                             <span class="mr-2">{{date('d M Y',strtotime($blog->created_at))}} </span> &bullet;
-                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                            <span class="ml-2"><span class="fa fa-comments"></span> {{count($blog->comments)}}</span>
                           </div>
                           <h2>{{$blog->name}}</h2>
                           {{substr(strip_tags($blog->description),0,55)}}
