@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Blog;
 
 class BlogController extends Controller
 {
@@ -34,7 +36,14 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Blog::create([
+            'user_id' => $request->user_id,
+            'title' => $request->title,
+            'category' => $request->category,
+            'details' => $request->details,
+            'image' => $request->image
+        ]);
+        return response()->json([], 201);
     }
 
     /**
