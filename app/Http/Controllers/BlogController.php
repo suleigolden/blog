@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Blog;
 use App\Comment;
@@ -124,7 +125,15 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $bloginfo = Blog::find($id);
+        $bloginfo->name =  $request->name;
+        $bloginfo->category = $request->category;
+        $bloginfo->description = $request->description;
+        $bloginfo->image = $request->image;
+        $bloginfo->save();
+
+        return response()->json($bloginfo, 201);
     }
 
     /**
@@ -135,6 +144,15 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Blog::find($id);
+        
+        $image_path = "blog_images/".$post->image; 
+        if(File::exists($image_path)) {
+            File::delete($image_path);
+            Storage::delete($image_path);
+         }
+
+        //$post->delete();
+        return response()->json($post, 201);
     }
 }

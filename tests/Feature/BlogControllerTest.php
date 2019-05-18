@@ -82,5 +82,30 @@ class BlogControllerTest extends TestCase
         $response->assertStatus(201);
    
     }
+
+    public function test_can_update_a_blog()
+    {
+        $faker = Factory::create();
+
+        $response = $this->json('POST', '/update/blog/11', [
+
+            'name' => $faker->word,
+            'category' => "Travel",
+            'description' => $faker->paragraph(random_int(1, 10)),
+            'image' => "img_12.jpg",
+
+        ]);
+
+
+        $response->assertStatus(201);
+    }
+
+    public function test_can_delete_blog()
+    { 
+        $response = $this->json('POST', '/blog/delete/11');
+
+        $response->assertStatus(201);
+   
+    }
     
 }
