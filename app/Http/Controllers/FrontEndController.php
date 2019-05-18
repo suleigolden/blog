@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Blog;
+use App\Comment;
 
 class FrontEndController extends Controller
 {
@@ -17,9 +20,10 @@ class FrontEndController extends Controller
     }
 
     
-    public function show($id)
+    public function showBlogDetails($id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        return response()->json($blog, 201);
     }
 
 }

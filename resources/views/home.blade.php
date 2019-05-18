@@ -18,7 +18,7 @@
               <div class="row">
                 @foreach($blogs as $blog)
                     <div class="col-md-4">
-                      <a href="######" class="blog-entry element-animate" data-animate-effect="fadeIn">
+                      <a href="{{url('/')}}/blog/{{$blog->id}}"  class="blog-entry element-animate" data-animate-effect="fadeIn">
                         <img src="{{ asset('blog_images') }}/{{$blog->image}}" style="max-height: 250px; min-height: 250px;">
                         <div class="blog-content-body">
                           <div class="post-meta">

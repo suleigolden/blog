@@ -64,7 +64,7 @@ class BlogControllerTest extends TestCase
     	]);
 
     }
-    */
+    
     public function test_can_display_all_blog_post()
     {
     	
@@ -72,6 +72,14 @@ class BlogControllerTest extends TestCase
 
         $response->assertStatus(201);
 
+   
+    }
+    */
+    public function test_can_display_blog_by_id()
+    { 
+        $response = $this->json('GET', '/blog/32');
+
+        $response->assertStatus(201);
    
     }
     
