@@ -40,9 +40,9 @@ class BlogControllerTest extends TestCase
 
         $response->assertStatus(201);
     }
-    */
     
-     public function test_can_comment_on_blog_post()
+    
+    public function test_can_comment_on_blog_post()
     {
     	$faker = Factory::create();
 
@@ -63,6 +63,16 @@ class BlogControllerTest extends TestCase
 	        'description' => $userComment
     	]);
 
+    }
+    */
+    public function test_can_display_all_blog_post()
+    {
+    	
+    	$response = $this->json('GET', '/getAll/blog');
+
+        $response->assertStatus(201);
+
+   
     }
     
 }

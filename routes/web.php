@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/create/blog', 'BlogController@store');
 Route::post('/comment/blog', 'BlogController@storeComment');
+Route::get('/getAll/blog', 'BlogController@index');
