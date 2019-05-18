@@ -27,7 +27,6 @@ class HomeController extends Controller
     public function index()
     {
         $blogs = Blog::all();
-        return response()->json($blogs, 201);
-        
+        return view('home',compact('blogs'));
     }
 }
