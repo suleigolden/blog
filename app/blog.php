@@ -14,7 +14,7 @@ class Blog extends Model
     protected $table = 'blogs';
 
     protected $fillable = [
-        'user_id','title','category','details','image'
+        'user_id','name','category','description','image'
     ];
     /**
      * The attributes that should be hidden for arrays.

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Blog;
+use App\Comment;
 
 class BlogController extends Controller
 {
@@ -38,12 +39,27 @@ class BlogController extends Controller
     {
         Blog::create([
             'user_id' => $request->user_id,
-            'title' => $request->title,
+            'name' => $request->name,
             'category' => $request->category,
-            'details' => $request->details,
+            'description' => $request->description,
             'image' => $request->image
         ]);
         return response()->json([], 201);
+    }
+    /**
+     * Store a newly created comment in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeComment(Request $request)
+    {
+        $comment = Comment::create([
+            'user_id' => $request->user_id,
+            'comments_id' => $request->comments_id,
+            'description' => $request->description
+        ]);
+        return response()->json($comment, 201);
     }
 
     /**

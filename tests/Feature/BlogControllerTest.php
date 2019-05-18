@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Faker\Factory;
 use App\User;
+use App\Blog;
+use App\Comment;
 
 class BlogControllerTest extends TestCase
 {
@@ -20,7 +22,7 @@ class BlogControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    
+    /*
     public function test_can_create_a_blog()
     {
     	$faker = Factory::create();
@@ -28,9 +30,9 @@ class BlogControllerTest extends TestCase
     	$response = $this->json('POST', '/create/blog', [
 
     		'user_id' => User::all()->random()->id,
-	        'title' => $faker->word,
+	        'name' => $faker->word,
 	        'category' => $faker->word,
-	        'details' => $faker->paragraph(random_int(1, 10)),
+	        'description' => $faker->paragraph(random_int(1, 10)),
 	        'image' => $faker->word,
 
     	]);
@@ -38,10 +40,29 @@ class BlogControllerTest extends TestCase
 
         $response->assertStatus(201);
     }
-    // public function testCan_generate_Company_Details()
-    // {
-    //     $response = $this->post('/generateCompanyDetails');
+    */
+    
+     public function test_can_comment_on_blog_post()
+    {
+    	$faker = Factory::create();
 
-    //     $response->assertStatus(201);
-    // }
+    	$response = $this->json('POST', '/comment/blog', [
+
+    		'user_id' => $userID = User::all()->random()->id,
+	        'comments_id' => $commentID = Blog::all()->random()->id,
+	        'description' => $userComment = $faker->paragraph(random_int(1, 3)),
+
+    	]);
+
+        $response->assertStatus(201);
+
+    	$this->assertDatabaseHas('comments',[
+
+    		'user_id' => $userID,
+	        'comments_id' =>  $commentID,
+	        'description' => $userComment
+    	]);
+
+    }
+    
 }
