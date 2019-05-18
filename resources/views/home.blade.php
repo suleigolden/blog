@@ -13,36 +13,29 @@
           <div class="row blog-entries">
             <div class="col-md-12 col-lg-12 main-content">
               <div class="row">
-                <div class="col-md-4">
-                  <a href="blog-single.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                    <img src="blog_images/img_5.jpg" alt="Image placeholder">
-                    <div class="blog-content-body">
-                      <div class="post-meta">
-                        <span class="author mr-2"><img src="blog_images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                      </div>
-                      <h2>How to Find the Video Games of Your Youth</h2>
+                @foreach($blogs as $blog)
+                    <div class="col-md-4">
+                      <a href="blog-single.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
+                        <img src="{{ asset('blog_images') }}/{{$blog->image}}" alt="Image placeholder">
+                        <div class="blog-content-body">
+                          <div class="post-meta">
+                            <span class="author mr-2"><img src="{{ asset('blog_images') }}/person_1.jpg"> User</span>&bullet;
+                            <span class="mr-2">{{date('d M Y',strtotime($blog->created_at))}} </span> &bullet;
+                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                          </div>
+                          <h2>{{$blog->name}}</h2>
+                          {{substr(strip_tags($blog->description),0,55)}}
+                        </div>
+                      </a>
                     </div>
-                  </a>
-                </div>
+                @endforeach
                 
-                
+            
               </div>
 
               <div class="row mt-5">
                 <div class="col-md-12 text-center">
-                  <nav aria-label="Page navigation" class="text-center">
-                    <ul class="pagination">
-                      <li class="page-item  active"><a class="page-link" href="#">&lt;</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">4</a></li>
-                      <li class="page-item"><a class="page-link" href="#">5</a></li>
-                      <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-                    </ul>
-                  </nav>
+                    {{ $blogs->links( "pagination::bootstrap-4") }}
                 </div>
               </div>
 
