@@ -6,6 +6,9 @@
       <section class="site-section py-sm">
         <div class="container">
           <div class="row">
+                <div class="col-md-12">
+                    @include("inc.messages")
+                </div>
             <div class="col-md-6">
               <h2 class="mb-4">Latest Posts</h2>
             </div>
@@ -16,7 +19,7 @@
                 @foreach($blogs as $blog)
                     <div class="col-md-4">
                       <a href="blog-single.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                        <img src="{{ asset('blog_images') }}/{{$blog->image}}" alt="Image placeholder">
+                        <img src="{{ asset('blog_images') }}/{{$blog->image}}" style="max-height: 250px; min-height: 250px;">
                         <div class="blog-content-body">
                           <div class="post-meta">
                             <span class="author mr-2"><img src="{{ asset('blog_images') }}/person_1.jpg"> User</span>&bullet;

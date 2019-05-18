@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Blog;
 use App\Comment;
+use Auth;
+use DB;
+use Validator;
+Use Session;
+use File;
 
 class BlogController extends Controller
 {
@@ -38,14 +43,39 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        Blog::create([
-            'user_id' => $request->user_id,
-            'name' => $request->name,
-            'category' => $request->category,
-            'description' => $request->description,
-            'image' => $request->image
+        // Blog::create([
+        //     'user_id' => $request->user_id,
+        //     'name' => $request->name,
+        //     'category' => $request->category,
+        //     'description' => $request->description,
+        //     'image' => $request->image
+        // ]);
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1999',
+            'name' => 'required|string|max:191',
+            'category' => 'required|string|max:50',
+            'description' => 'required|string'
         ]);
-        return response()->json([], 201);
+
+         $imageName = time().'.'.request()->image->getClientOriginalExtension();
+
+        if(request()->image->move(public_path('blog_images/'), $imageName)){
+                $bloginfo =  new Blog();
+                $bloginfo->user_id = Auth::user()->id;
+                $bloginfo->name =  $request->name;
+                $bloginfo->category = $request->category;
+                $bloginfo->description = $request->description;
+                $bloginfo->image = $imageName;
+                $bloginfo->save();
+                
+                Session::flash('success', "Blog save successful");
+                return redirect('/home');
+
+        }else{
+            Session::flash('error', "Error saving Blog please try again");
+            return redirect('/createnewblog');
+        }
+       
     }
     /**
      * Store a newly created comment in storage.

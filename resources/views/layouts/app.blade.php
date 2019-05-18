@@ -42,21 +42,27 @@
             <div class="collapse navbar-collapse" id="navbarMenu">
               <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                  <a class="nav-link active" href="index.html">Home</a>
+                  <a class="nav-link active" href="{{ url('/') }}">Home</a>
                 </li>
                 
 
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
                   <div class="dropdown-menu" aria-labelledby="dropdown05">
                     <a class="dropdown-item" href="#">Lifestyle</a>
                     <a class="dropdown-item" href="#">Food</a>
-                    <a class="dropdown-item" href="#">Adventure</a>
                     <a class="dropdown-item" href="#">Travel</a>
                     <a class="dropdown-item" href="#">Business</a>
                   </div>
 
                 </li>
+                 @guest
+                    
+                @else
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url('/createnewblog') }}">Create Blog</a>
+                    </li>
+                @endguest
                 
               </ul>
               <!-- Right Side Of Navbar -->
@@ -67,7 +73,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
+                            <a style="font-weight: bold;" class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
 
                                 <ul class="dropdown-menu">
                                     <li>
