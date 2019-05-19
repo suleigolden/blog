@@ -35,10 +35,10 @@
               </div>
 
               <div class="pt-5">
-                <h3 class="mb-5">{{count($blogs->comments)}} Comments</h3>
+                <h3 class="mb-5"><label id="numComments">{{count($blogs->comments)}}</label> Comments</h3>
                 <ul class="comment-list" id="commentList">
                 @foreach($blogs->comments as $comment)
-                  <li class="comment">
+                  <li class="comment" id="commentItem{{$comment->id}}">
                     <div class="vcard">
                       <img src="{{ asset('blog_images') }}/person_1.jpg" alt="Image placeholder">
                     </div>
@@ -46,7 +46,10 @@
                       <h3>{{$comment->user->name}}</h3>
                       <div class="meta">{{date('d M Y',strtotime($comment->created_at))}}</div>
                       <p>{{$comment->description}}</p>
+
                     </div>
+                    <a id="deleteMessagebnt{{$comment->id}}" onclick="deleteComment('{{$comment->id}}');" style="font-size: 13px; color: #dc3545; cursor: pointer;"> 
+                      <i class="fa fa-trash"></i> Delete</a>
                   </li>
                  @endforeach
 

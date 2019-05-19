@@ -69,12 +69,38 @@ const url = "comment";
        
       }  
     }
-    
+
     if(comment==null || comment=="" || comment==" "){
        $('#saveMessage').html("<label style='color:#F00; padding:4px; background-color:#FFF; '>Comment can not be Empty.</label>");
     }else{
        hr.send(vars); 
      $('#saveMessage').html("<label style='color:#5cb85c;'>posting comment....</label>");
     }
+    
+}
+//http://localhost/suleiman/blog_ukrian/public/blog/comment/delete
+function deleteComment(id){
+const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
+const hr = new XMLHttpRequest();
+const url = "comment/delete";
+   const vars = "_token="+CSRF_TOKEN+"&comment_id="+id;
+    hr.open("POST", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    hr.onreadystatechange = function() {
+      if(hr.readyState == 4 && hr.status == 200) {
+        let return_data = JSON.parse(hr.responseText);
+        //console.log(return_data);
+        let total_comment = $('#numComments').html();
+        total_comment = parseInt(total_comment);
+        total_comment -= 1;
+        $('#numComments').html(total_comment)
+         $('#commentItem'+id).html('');
+       
+      }
+
+    }
+    hr.send(vars); 
+   $('#deleteMessagebnt'+id).html("<label style='color:#5cb85c;'>deleting...</label>");
     
 }

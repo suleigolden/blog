@@ -203,13 +203,14 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyComment($id)
+    public function destroyComment(Request $request)
     {
-        $comment = Comment::find($id);
+         $comment = Comment::find($request->comment_id);
 
 
-        $comment->delete();
+         $comment->delete();
         
-        return response()->json($comment, 201);
+        // return response()->json($comment, 201);
+        return json_encode($comment);
     }
 }
