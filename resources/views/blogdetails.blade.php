@@ -48,8 +48,10 @@
                       <p>{{$comment->description}}</p>
 
                     </div>
-                    <a id="deleteMessagebnt{{$comment->id}}" onclick="deleteComment('{{$comment->id}}');" style="font-size: 13px; color: #dc3545; cursor: pointer;"> 
+                    @if(auth()->user()->id == $comment->user_id || auth()->user()->id == $blogs->user_id)
+                      <a id="deleteMessagebnt{{$comment->id}}" onclick="deleteComment('{{$comment->id}}');" style="font-size: 13px; color: #dc3545; cursor: pointer;"> 
                       <i class="fa fa-trash"></i> Delete</a>
+                    @endif
                   </li>
                  @endforeach
 
