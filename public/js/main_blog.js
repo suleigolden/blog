@@ -62,7 +62,11 @@ const url = "comment";
         let return_data = JSON.parse(hr.responseText);
         //console.log(return_data);
         if(return_data.description){
-          $("#commentList").append('<li class="comment"><div class="vcard"><img src="../blog_images/person_1.jpg" ></div><div class="comment-body"><h3>'+user_name+'</h3><div class="meta">2 seconds agao</div><p>'+return_data.description+'</p></div></li>');
+          $("#commentList").append('<li id="commentItem'+return_data.id+'" class="comment"><div class="vcard"><img src="../blog_images/person_1.jpg" ></div><div class="comment-body"><h3>'+user_name+'</h3><div class="meta">2 seconds agao</div><p>'+return_data.description+'</p></div><a id="deleteMessagebnt'+return_data.id+'" onclick="deleteComment('+return_data.id+');" style="font-size: 13px; color: #dc3545; cursor: pointer;"> <i class="fa fa-trash"></i> Delete</a></li>');
+            let total_comment = $('#numComments').html();
+            total_comment = parseInt(total_comment);
+            total_comment += 1;
+            $('#numComments').html(total_comment);
            $("#commentmessage").val('');
            $('#saveMessage').html('');
         }
