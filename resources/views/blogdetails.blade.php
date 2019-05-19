@@ -23,7 +23,8 @@
                   <img src="{{ asset('blog_images') }}/{{$blogs->image}}" style="min-width: 80%;" alt="Image placeholder" class="img-fluid">
                 </div>
               </div>
-              
+                <a href="{{url('/')}}/blog/edit/{{$blogs->id}}" class="btn btn-primary">Edit Blog</a>
+                <a href="#" class="btn btn-danger">Delete Blog</a>
               </div>
 
               <div class="pt-5">

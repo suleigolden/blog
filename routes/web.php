@@ -24,7 +24,9 @@ Route::get('/blog/{id}', 'FrontEndController@showBlogDetails');
 Route::get('/blog/category/{category}', 'FrontEndController@showBlogCategory');
 
 Route::post('/create/blog', 'BlogController@store');
+Route::get('/blog/edit/{id}', 'BlogController@edit');
 Route::post('/update/blog/{id}', 'BlogController@update');
+Route::post('/blog/edit/update/{id}', 'BlogController@update');
 Route::post('/blog/delete/{id}', 'BlogController@destroy');
 
 Route::post('/comment/blog', 'BlogController@storeComment');

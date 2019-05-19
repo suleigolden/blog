@@ -15,34 +15,39 @@
                     <div class="col-md-10">
                       @include("inc.messages")
                   </div>
-                      <h3 class="mb-5">Create New Blog</h3>
+                      <h3 class="mb-5">Edit Blog</h3>
 
-                      <form method="POST" class="p-5 bg-light" action="create/blog" enctype="multipart/form-data">
+                      <form method="POST" class="p-5 bg-light" action="update/{{$blogs->id}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                        <div class="form-group">
                         <label for="name">Titile*</label>
-                        <input type="text" class="form-control" name="name" placeholder="Blog Titile" required>
+                        <input type="text" class="form-control" name="name" value="{{$blogs->name}}" placeholder="Blog Titile" required>
                       </div>
                       <div class="form-group">
                         <label for="name">Category*</label>
                         <select class="form-control" name="category" required>
-                          <option value="">select</option>
+                          <option value="{{$blogs->category}}">{{$blogs->category}}</option>
                           <option value="Lifestyle">Lifestyle</option>
                           <option value="Food">Food</option>
                           <option value="Travel">Travel</option>
                           <option value="Business">Business</option>
                         </select>
                       </div>
+                      <div class="col-md-12 mb-4">
+                        <label for="name">Cuurent Image</label>
+                      <img src="{{ asset('blog_images') }}/{{$blogs->image}}" style="min-width: 80%;" alt="Image placeholder" class="img-fluid">
+                      <input type="hidden" name="oldImage" value="{{$blogs->image}}">
+                    </div>
                       <div class="form-group">
-                          <label for="name">Blog Image*</label>
-                         <input type="file" accept="image/*" name="image" required>
+                          <label for="name">New Image</label>
+                         <input type="file" accept="image/*" name="newImage">
                       </div>
                       <div class="form-group">
                         <label for="message">Blog Description*</label>
-                        <textarea name="description" cols="30" rows="3" class="form-control" placeholder="Blog Description" required></textarea>
+                        <textarea name="description" cols="30" rows="7" class="form-control" placeholder="Blog Description" required>{{$blogs->description}}</textarea>
                       </div>
                       <div class="form-group">
-                        <input type="submit" value="Post BLog" class="btn btn-primary">
+                        <input type="submit" value="Update Blog" class="btn btn-primary">
                       </div>
                   </form>
                   </div>

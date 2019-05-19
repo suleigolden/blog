@@ -113,7 +113,14 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $blogs = Blog::find($id);
+
+        // Check for correct user
+        if(auth()->user()->id !==$blogs->user_id){
+            Session::flash('error', "Unauthorized Page");
+            return back();
+        }
+        return view('blogedit',compact('blogs'));
     }
 
     /**
@@ -126,14 +133,37 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         
+        if($request->hasFile('newImage')){
+
+            $this->validate($request, [
+            'newImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1999'
+            ]);
+            
+            $imageName = time().'.'.request()->newImage->getClientOriginalExtension();
+
+            if(request()->newImage->move(public_path('blog_images/'), $imageName)){
+              
+              //delete old image
+                $image_path = "blog_images/".$request->oldImage;  
+                 if(File::exists($image_path)) {
+                   
+                        File::delete($image_path);
+                }
+             }
+            
+        }
         $bloginfo = Blog::find($id);
         $bloginfo->name =  $request->name;
         $bloginfo->category = $request->category;
         $bloginfo->description = $request->description;
-        $bloginfo->image = $request->image;
+        if($request->hasFile('newImage')){
+            $bloginfo->image = $imageName;
+        }
         $bloginfo->save();
 
-        return response()->json($bloginfo, 201);
+        Session::flash('success', "Update Success");
+        return back();
+        //return response()->json($bloginfo, 201);
     }
 
     /**
