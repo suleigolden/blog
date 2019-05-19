@@ -23,10 +23,15 @@
                   <img src="{{ asset('blog_images') }}/{{$blogs->image}}" style="min-width: 80%;" alt="Image placeholder" class="img-fluid">
                 </div>
               </div>
-                @if(auth()->user()->id == $blogs->user_id)
-                <a href="{{url('/')}}/blog/edit/{{$blogs->id}}" class="btn btn-primary">Edit Blog</a>
-                <a href="#" onclick="deleteBlog('{{$blogs->id}}');" class="btn btn-danger">Delete Blog</a>
-                @endif
+               @guest
+
+               @else
+                  @if(auth()->user()->id == $blogs->user_id)
+                  <a href="{{url('/')}}/blog/edit/{{$blogs->id}}" class="btn btn-primary">Edit Blog</a>
+                  <a href="#" onclick="deleteBlog('{{$blogs->id}}');" class="btn btn-danger">Delete Blog</a>
+                  @endif
+                @endguest
+
               </div>
 
               <div class="pt-5">
@@ -48,22 +53,25 @@
                   
                 </ul>
                 <!-- END comment-list -->
-                
-                <div class="comment-form-wrap pt-5">
-                  <h3 class="mb-5">Leave a comment</h3>
-                  <form action="#" class="p-5 bg-light">
+                 @guest
+                    <a class="btn btn-primary" href="{{ route('login') }}">Login to leave a comment</a>
+                 @else
+                  <div class="comment-form-wrap pt-5">
+                    <h3 class="mb-5">Leave a comment</h3>
+                    <form action="#" class="p-5 bg-light">
 
-                    <div class="form-group">
-                      <label for="message">Message</label>
-                      <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <input type="submit" value="Post Comment" class="btn btn-primary">
-                    </div>
+                      <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" value="Post Comment" class="btn btn-primary">
+                      </div>
 
-                  </form>
+                    </form>
+                  </div>
+                  @endguest
                 </div>
-              </div>
 
             </div>
           @endif

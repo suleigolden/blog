@@ -75,8 +75,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a class="nav-link active" href="{{ route('login') }}">Login</a></li>
+                            <li><a class="nav-link active" href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="nav-item dropdown">
                             <a style="font-weight: bold;" class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
@@ -109,7 +109,7 @@
 <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
 
     <script src="{{ asset('js/main_blog.js') }}"></script>
-    
+
     <script src="{{ asset('js/jquery-3.2.1.min.j') }}s"></script>
     <script src="{{ asset('js/jquery-migrate-3.0.0.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
