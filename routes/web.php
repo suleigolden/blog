@@ -11,15 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/createnewblog', 'HomeController@createblog');
+Route::get('/', 'FrontEndController@index');
 Route::get('/blog/{id}', 'FrontEndController@showBlogDetails');
+Route::get('/blog/category/{category}', 'FrontEndController@showBlogCategory');
 
 Route::post('/create/blog', 'BlogController@store');
 Route::post('/update/blog/{id}', 'BlogController@update');

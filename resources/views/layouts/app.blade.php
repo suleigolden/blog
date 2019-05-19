@@ -49,10 +49,10 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
                   <div class="dropdown-menu" aria-labelledby="dropdown05">
-                    <a class="dropdown-item" href="#">Lifestyle</a>
-                    <a class="dropdown-item" href="#">Food</a>
-                    <a class="dropdown-item" href="#">Travel</a>
-                    <a class="dropdown-item" href="#">Business</a>
+                    <a class="dropdown-item" href="{{url('/')}}/blog/category/Lifestyle">Lifestyle</a>
+                    <a class="dropdown-item" href="{{url('/')}}/blog/category/Food">Food</a>
+                    <a class="dropdown-item" href="{{url('/')}}/blog/category/Travel">Travel</a>
+                    <a class="dropdown-item" href="{{url('/')}}/blog/category/Business">Business</a>
                   </div>
 
                 </li>

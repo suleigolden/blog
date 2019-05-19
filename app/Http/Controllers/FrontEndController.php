@@ -16,7 +16,8 @@ class FrontEndController extends Controller
      */
     public function index()
     {
-        //
+        $blogs = Blog::orderBy('id','desc')->paginate(6);
+        return view('welcome',compact('blogs'));
     }
 
     
@@ -26,6 +27,12 @@ class FrontEndController extends Controller
 
         return view('blogdetails',compact('blogs'));
         //return response()->json($blog, 201);
+    }
+
+    public function showBlogCategory($category)
+    {
+        $blogs = Blog::where('category',$category)->paginate(6);
+        return view('welcome',compact('blogs'));
     }
 
 }

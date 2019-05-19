@@ -1,95 +1,67 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+      <section class="site-section py-sm">
+        <div class="container">
+          <div class="row">
+                <div class="col-md-12">
+                    @include("inc.messages")
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+            <div class="col-md-6">
+              <h2 class="mb-4">Latest Posts</h2>
             </div>
+          </div>
+          <div class="row blog-entries">
+            <div class="col-md-12 col-lg-12 main-content">
+              <div class="row">
+                @if($blogs)
+                @foreach($blogs as $blog)
+                    <div class="col-md-4">
+                      <a href="{{url('/')}}/blog/{{$blog->id}}"  class="blog-entry element-animate" data-animate-effect="fadeIn">
+                        <img src="{{ asset('blog_images') }}/{{$blog->image}}" style="max-height: 250px; min-height: 250px;">
+                        <div class="blog-content-body">
+                          <div class="post-meta">
+                            <span class="author mr-2"><img src="{{ asset('blog_images') }}/person_1.jpg"> {{substr(strip_tags($blog->user->name),0,10)}}</span>&bullet;
+                            <span class="mr-2">{{date('d M Y',strtotime($blog->created_at))}} </span> &bullet;
+                            <span class="ml-2"><span class="fa fa-comments"></span> {{count($blog->comments)}}</span>
+                          </div>
+                          <h2>{{$blog->name}}</h2>
+                          {{substr(strip_tags($blog->description),0,55)}}
+                        </div>
+                      </a>
+                    </div>
+                @endforeach
+                @endif
+                
+            
+              </div>
+
+              <div class="row mt-5">
+                <div class="col-md-12 text-center">
+                    {{ $blogs->links( "pagination::bootstrap-4") }}
+                </div>
+              </div>
+
+
+              
+
+              
+
+            </div>
+
+            <!-- END main-content -->
+
+          
+            
+            </div>
+            <!-- END sidebar -->
+
+          </div>
         </div>
-    </body>
-</html>
+      </section>
+    
+
+
+@endsection
