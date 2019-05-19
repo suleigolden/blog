@@ -16,6 +16,7 @@
           <div class="row blog-entries">
             <div class="col-md-12 col-lg-12 main-content">
               <div class="row">
+                @if($blogs)
                 @foreach($blogs as $blog)
                     <div class="col-md-4">
                       <a href="{{url('/')}}/blog/{{$blog->id}}"  class="blog-entry element-animate" data-animate-effect="fadeIn">
@@ -32,6 +33,7 @@
                       </a>
                     </div>
                 @endforeach
+                @endif
                 
             
               </div>

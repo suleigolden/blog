@@ -22,8 +22,10 @@ class FrontEndController extends Controller
     
     public function showBlogDetails($id)
     {
-        $blog = Blog::findOrFail($id);
-        return response()->json($blog, 201);
+        $blogs = Blog::findOrFail($id);
+
+        return view('blogdetails',compact('blogs'));
+        //return response()->json($blog, 201);
     }
 
 }

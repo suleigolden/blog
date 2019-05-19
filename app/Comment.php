@@ -22,4 +22,8 @@ class Comment extends Model
      * @var array
      */
     protected $hidden = [];
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
