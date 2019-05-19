@@ -14,7 +14,7 @@ class Comment extends Model
     protected $table = 'comments';
     
     protected $fillable = [
-        'user_id','comments_id','description'
+        'user_id','blog_id','description'
     ];
     /**
      * The attributes that should be hidden for arrays.

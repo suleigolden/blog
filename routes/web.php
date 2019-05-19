@@ -28,6 +28,7 @@ Route::get('/blog/edit/{id}', 'BlogController@edit');
 Route::post('/update/blog/{id}', 'BlogController@update');
 Route::post('/blog/edit/update/{id}', 'BlogController@update');
 Route::post('/blog/delete/{id}', 'BlogController@destroy');
+Route::get('/blog/delete/{id}', 'BlogController@destroy');
 
 Route::post('/comment/blog', 'BlogController@storeComment');
 Route::get('/getAll/blog', 'BlogController@index');

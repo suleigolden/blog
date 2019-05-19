@@ -25,7 +25,7 @@
               </div>
                 @if(auth()->user()->id == $blogs->user_id)
                 <a href="{{url('/')}}/blog/edit/{{$blogs->id}}" class="btn btn-primary">Edit Blog</a>
-                <a href="#" class="btn btn-danger">Delete Blog</a>
+                <a href="#" onclick="deleteBlog('{{$blogs->id}}');" class="btn btn-danger">Delete Blog</a>
                 @endif
               </div>
 

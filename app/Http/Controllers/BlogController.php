@@ -174,15 +174,25 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        $post = Blog::find($id);
+        $blogs = Blog::find($id);
+
+        if(auth()->user()->id !== $blogs->user_id){
+            Session::flash('error', "Unauthorized Page");
+            return back();
+        }
+
         
-        $image_path = "blog_images/".$post->image; 
+        
+        $image_path = "blog_images/".$blogs->image; 
         if(File::exists($image_path)) {
             File::delete($image_path);
-            Storage::delete($image_path);
+            //Storage::delete($image_path);
          }
 
-        //$post->delete();
-        return response()->json($post, 201);
+        $blogs->delete();
+        Comment::where('blog_id', $id)->delete();
+        Session::flash('success', "Blog Deleted Success");
+        return redirect('/');
+        //return response()->json($post, 201);
     }
 }
