@@ -43,3 +43,38 @@ function deleteBlog(blogid){
       }
     });
   }
+
+
+function saveComment(){
+const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+const comment = $("#commentmessage").val(); 
+const blogid = $("#blogId").val(); 
+const user_name = $("#username").val(); 
+const userid = $("#userCommentID").val(); 
+const hr = new XMLHttpRequest();
+const url = "comment";
+   const vars = "_token="+CSRF_TOKEN+"&user_id="+userid+"&blog_id="+blogid+"&description="+comment;
+    hr.open("POST", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    hr.onreadystatechange = function() {
+      if(hr.readyState == 4 && hr.status == 200) {
+        let return_data = JSON.parse(hr.responseText);
+        //console.log(return_data);
+        if(return_data.description){
+          $("#commentList").append('<li class="comment"><div class="vcard"><img src="../blog_images/person_1.jpg" ></div><div class="comment-body"><h3>'+user_name+'</h3><div class="meta">2 seconds agao</div><p>'+return_data.description+'</p></div></li>');
+           $("#commentmessage").val('');
+           $('#saveMessage').html('');
+        }
+       
+      }  
+    }
+    
+    if(comment==null || comment=="" || comment==" "){
+       $('#saveMessage').html("<label style='color:#F00; padding:4px; background-color:#FFF; '>Comment can not be Empty.</label>");
+    }else{
+       hr.send(vars); 
+     $('#saveMessage').html("<label style='color:#5cb85c;'>posting comment....</label>");
+    }
+    
+}

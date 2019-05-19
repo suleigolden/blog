@@ -36,7 +36,7 @@
 
               <div class="pt-5">
                 <h3 class="mb-5">{{count($blogs->comments)}} Comments</h3>
-                <ul class="comment-list">
+                <ul class="comment-list" id="commentList">
                 @foreach($blogs->comments as $comment)
                   <li class="comment">
                     <div class="vcard">
@@ -59,13 +59,16 @@
                   <div class="comment-form-wrap pt-5">
                     <h3 class="mb-5">Leave a comment</h3>
                     <form action="#" class="p-5 bg-light">
-
+                      <input type="hidden" id="userCommentID" value="{{auth()->user()->id}}">
+                      <input type="hidden" id="username" value="{{auth()->user()->name}}">
+                      <input type="hidden" id="blogId" value="{{$blogs->id}}">
                       <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                        <label for="message">Comment</label>
+                        <textarea name="" id="commentmessage" placeholder="Write new comment" cols="30" rows="3" class="form-control"></textarea>
                       </div>
                       <div class="form-group">
-                        <input type="submit" value="Post Comment" class="btn btn-primary">
+                        <input onclick="saveComment();" value="Post Comment" class="btn btn-primary">
+                        <div id="saveMessage"></div>
                       </div>
 
                     </form>

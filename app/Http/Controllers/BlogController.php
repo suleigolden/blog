@@ -88,10 +88,11 @@ class BlogController extends Controller
     {
         $comment = Comment::create([
             'user_id' => $request->user_id,
-            'comments_id' => $request->comments_id,
+            'blog_id' => $request->blog_id,
             'description' => $request->description
         ]);
-        return response()->json($comment, 201);
+        //return response()->json($comment, 201);
+        return json_encode($comment);
     }
 
     /**
