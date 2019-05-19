@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\Usertrack;
+use Soumen\Agent\Facades\Agent;
+use Soumen\Agent\Services\Browser;
 
 class LoginController extends Controller
 {
@@ -35,5 +39,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated(Request $request)
+    {
+       $trackinfo =  new Usertrack();
+       $trackinfo->ip_address =  Agent::ip();
+       $trackinfo->user_info = Agent::userAgent();
+       $trackinfo->browser_name = Browser::get()->name;
+       $trackinfo->save();
     }
 }
