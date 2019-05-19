@@ -32,4 +32,5 @@ Route::get('/blog/delete/{id}', 'BlogController@destroy');
 
 Route::post('/comment/blog', 'BlogController@storeComment');
 Route::post('/blog/comment', 'BlogController@storeComment');
+Route::POST('/comment/delete/{id}', 'BlogController@destroyComment');
 Route::get('/getAll/blog', 'BlogController@index');

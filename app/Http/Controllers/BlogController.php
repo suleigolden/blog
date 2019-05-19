@@ -196,4 +196,20 @@ class BlogController extends Controller
         return redirect('/');
         //return response()->json($post, 201);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyComment($id)
+    {
+        $comment = Comment::find($id);
+
+
+        $comment->delete();
+        
+        return response()->json($comment, 201);
+    }
 }

@@ -75,34 +75,41 @@ class BlogControllerTest extends TestCase
    
     }
     */
-    public function test_can_display_blog_by_id()
-    { 
-        $response = $this->json('GET', '/blog/32');
+    // public function test_can_display_blog_by_id()
+    // { 
+    //     $response = $this->json('GET', '/blog/32');
 
-        $response->assertStatus(201);
+    //     $response->assertStatus(201);
    
-    }
+    // }
 
-    public function test_can_update_a_blog()
-    {
-        $faker = Factory::create();
+    // // public function test_can_update_a_blog()
+    // // {
+    // //     $faker = Factory::create();
 
-        $response = $this->json('POST', '/update/blog/11', [
+    // //     $response = $this->json('POST', '/update/blog/11', [
 
-            'name' => $faker->word,
-            'category' => "Travel",
-            'description' => $faker->paragraph(random_int(1, 10)),
-            'image' => "img_12.jpg",
+    // //         'name' => $faker->word,
+    // //         'category' => "Travel",
+    // //         'description' => $faker->paragraph(random_int(1, 10)),
+    // //         'image' => "img_12.jpg",
 
-        ]);
+    // //     ]);
 
 
-        $response->assertStatus(201);
-    }
+    // //     $response->assertStatus(201);
+    // // }
 
-    public function test_can_delete_blog()
+    // // public function test_can_delete_blog()
+    // // { 
+    // //     $response = $this->json('POST', '/blog/delete/11');
+
+    // //     $response->assertStatus(201);
+   
+    // // }
+    public function test_can_delete_comment()
     { 
-        $response = $this->json('POST', '/blog/delete/11');
+        $response = $this->json('POST', '/comment/delete/9');
 
         $response->assertStatus(201);
    
