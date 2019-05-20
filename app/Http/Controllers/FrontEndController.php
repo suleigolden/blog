@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Blog;
 use App\Comment;
+use DB;
 
 class FrontEndController extends Controller
 {
@@ -33,6 +34,21 @@ class FrontEndController extends Controller
     {
         $blogs = Blog::where('category',$category)->paginate(6);
         return view('welcome',compact('blogs'));
+    }
+
+    public function getUserAgentTarck(){
+         $resultData = DB::table('usertracks')->select('browser_name', DB::raw('COUNT(browser_name) AS occurrences'))
+            ->groupBy('browser_name')
+            ->orderBy('occurrences', 'DESC')
+            ->limit(10)
+            ->get();
+
+          //   foreach ($data as $key) {
+          //       echo $key->browser_name." Views ".$key->occurrences."<br>";
+          //   }
+          // print_r($data);
+
+        return json_encode($resultData);
     }
 
 }

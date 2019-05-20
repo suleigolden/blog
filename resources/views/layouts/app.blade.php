@@ -38,6 +38,7 @@
             <div class="col-12 text-center">
               <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
               <h1 class="site-logo"><a href="{{ url('/') }}">Suleiman's BLog</a></h1>
+              <a href="#" onclick="userAgentTarck();">Click Me</a>
             </div>
           </div>
         </div>
@@ -120,6 +121,50 @@
 
     
     <script src="{{ asset('js/main.js') }}"></script>
+    <script type="text/javascript">
+        function userAgentTarck(){
+   //let message = userTarck();
+    const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
+    const hr = new XMLHttpRequest();
+    const url = '{{ url('userAgentTarck') }}';//"userAgentTarck/";
+    const vars = "_token="+CSRF_TOKEN;
+    let message = '....';
+    hr.open("GET", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    Swal.fire({
+    title: 'Do you want view Browser usage?',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes'
+  }).then((result) => {
+    if (result.value) {
+
+      hr.onreadystatechange = function() {
+      if(hr.readyState == 4 && hr.status == 200) {
+        let return_data = JSON.parse(hr.responseText);
+            
+           for (let i = 0; i < return_data.length; ++i) {
+              message += '['+return_data[i].browser_name+'='+return_data[i].occurrences+']<hr>';
+          }
+          // let mResult = '<table><tr>'+message+'</tr></table>';
+          // message = mResult;
+           Swal.fire(message);
+
+      }
+
+    }
+    hr.send(vars);
+
+    Swal.fire(message);
+
+  }
+
+});
+
+}
+    </script>
     </div>
 
    

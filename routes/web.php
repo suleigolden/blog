@@ -22,6 +22,7 @@ Route::get('/createnewblog', 'HomeController@createblog');
 Route::get('/', 'FrontEndController@index');
 Route::get('/blog/{id}', 'FrontEndController@showBlogDetails');
 Route::get('/blog/category/{category}', 'FrontEndController@showBlogCategory');
+Route::get('/userAgentTarck', 'FrontEndController@getUserAgentTarck');
 
 Route::post('/create/blog', 'BlogController@store');
 Route::get('/blog/edit/{id}', 'BlogController@edit');

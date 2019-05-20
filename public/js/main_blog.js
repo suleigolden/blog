@@ -82,7 +82,7 @@ const url = "comment";
     }
     
 }
-//http://localhost/suleiman/blog_ukrian/public/blog/comment/delete
+
 function deleteComment(id){
 const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
 const hr = new XMLHttpRequest();
@@ -108,3 +108,4 @@ const url = "comment/delete";
    $('#deleteMessagebnt'+id).html("<label style='color:#5cb85c;'>deleting...</label>");
     
 }
+
