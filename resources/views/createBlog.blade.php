@@ -39,7 +39,7 @@
                       </div>
                       <div class="form-group">
                         <label for="message">Blog Description*</label>
-                        <textarea name="description" cols="30" rows="3" class="form-control" placeholder="Blog Description" required></textarea>
+                        <textarea name="description" id="article-ckeditor" cols="30" rows="3" class="form-control" placeholder="Blog Description" required></textarea>
                       </div>
                       <div class="form-group">
                         <input type="submit" value="Post BLog" class="btn btn-primary">

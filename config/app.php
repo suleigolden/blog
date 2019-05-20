@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Soumen\Agent\AgentServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
 
     ],
 

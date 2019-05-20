@@ -17,7 +17,7 @@
               <a class="category mb-5" href="#">{{$blogs->category}}</a>
              
               <div class="post-content-body">
-                {{$blogs->description}}
+                {!!$blogs->description!!}
               <div class="row mb-5">
                 <div class="col-md-12 mb-4">
                   <img src="{{ asset('blog_images') }}/{{$blogs->image}}" style="min-width: 80%;" alt="Image placeholder" class="img-fluid">

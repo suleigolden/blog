@@ -28,7 +28,7 @@
                             <span class="ml-2"><span class="fa fa-comments"></span> {{count($blog->comments)}}</span>
                           </div>
                           <h2>{{$blog->name}}</h2>
-                          {{substr(strip_tags($blog->description),0,55)}}
+                          {!!substr(strip_tags($blog->description),0,55)!!}
                         </div>
                       </a>
                     </div>
